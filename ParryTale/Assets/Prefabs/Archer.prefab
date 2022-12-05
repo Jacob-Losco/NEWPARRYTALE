@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 668288701240454775}
   m_Layer: 0
   m_Name: Archer
-  m_TagString: Untagged
+  m_TagString: Archer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5614169278168584476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.08097, y: -1.3432033, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5740972110550657428}
@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bbe123f658687194498b5031d16e0696, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8739d812800cb95419d9a74fb155d84e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -106,7 +106,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.65, y: 3.45}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -144,13 +144,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5614169278168584476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c3a3335b59a5545b2fbb0edbc02de2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cff4bf04d97a5646a79f27dc76220b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: 3
-  arrow: {fileID: 6964520225398697088, guid: 5637669363bb5df4c8d51ba51e28e68a, type: 3}
+  arrow: {fileID: 5614169278168584476}
   shootPoint: {fileID: 9207976983765010917}
-  player: {fileID: 7921386252701426032, guid: bea3197b32c2cdb4aa4ed61c2423ca16, type: 3}
+  player: {fileID: 7921386252701426032, guid: f04c4c39da6b7f64dac09d2c87b26f15, type: 3}
   speed: 5
 --- !u!1 &9207976983765010917
 GameObject:
