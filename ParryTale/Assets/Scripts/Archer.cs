@@ -29,7 +29,7 @@ public class Archer : MonoBehaviour
     private void rotate()
     {
         Vector3 direction = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
-        Debug.Log("Direction = " + direction);
+        //Debug.Log("Direction = " + direction);
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //direction.Normalize();
         // facing = direction;

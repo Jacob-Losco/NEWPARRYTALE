@@ -26,16 +26,18 @@ public class Arrow : MonoBehaviour
         Move();
     }
     
-        private void Move()
-        {
-            //Vector3 newPosition = speed * direction;
-            //newPosition.z = 0;
+    private void Move()
+    {
+        Vector3 newPosition = speed * direction;
+        newPosition.z = 0;
 
 
-
-            Vector3 newPosition = new Vector3(speed * transform.up.x * Time.deltaTime, speed * transform.up.y * Time.deltaTime, 0);
-            this.transform.position += newPosition;
-
-        }
+        this.transform.position += newPosition;
+    }
+    public void reflect(Vector2 inNormal)
+    {
+        Vector2 inDirection = GetComponent<Rigidbody2D>().velocity;
+        
+    }
     
 }

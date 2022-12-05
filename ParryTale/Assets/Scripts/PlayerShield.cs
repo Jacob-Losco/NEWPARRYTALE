@@ -9,6 +9,8 @@ public class PlayerShield : MonoBehaviour
     private bool shieldState = false;
     private bool inCooldown = false;
     private GameObject swordsman;
+    private GameObject arrow;
+    private Arrow arrowScript;
     private SwordsmanMove swordScript;
 
     // Start is called before the first frame update
@@ -57,9 +59,12 @@ public class PlayerShield : MonoBehaviour
         GameObject collidedObject = collision.gameObject;
         if (collidedObject.tag == "Arrow")
         {
+            arrow = collidedObject;
+            arrowScript = arrow.GetComponent<Arrow>();
             if (shieldState)
             {
-                //reflect arrow
+
+                arrowScript.reflect();
             }
             else
             {

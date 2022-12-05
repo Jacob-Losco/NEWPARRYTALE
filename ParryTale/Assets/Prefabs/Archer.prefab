@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: 3
-  arrow: {fileID: 5614169278168584476}
+  arrow: {fileID: 6964520225398697088, guid: 28c17ee6ab021bf4c8984a6213e231ab, type: 3}
   shootPoint: {fileID: 9207976983765010917}
   player: {fileID: 7921386252701426032, guid: f04c4c39da6b7f64dac09d2c87b26f15, type: 3}
   speed: 5
