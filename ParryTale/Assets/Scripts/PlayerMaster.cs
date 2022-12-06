@@ -121,6 +121,7 @@ public class PlayerMaster : MonoBehaviour
     public void subtractHealth()
     {
         health--;
+        //Player Damage Sound Effect
         if(health == 0)
         {
             death();
@@ -129,6 +130,7 @@ public class PlayerMaster : MonoBehaviour
 
     public void death()
     {
+        //Player Death Sound Effect
         Destroy(playerBody);
         Destroy(playerShield);
         Destroy(this);

@@ -12,11 +12,12 @@ public class PlayerShield : MonoBehaviour
     private GameObject arrow;
     private Arrow arrowScript;
     private SwordsmanMove swordScript;
+    private Color ogColor;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        ogColor = GetComponent<Renderer>().material.color;
     }
 
     // Update is called once per frame
@@ -34,7 +35,7 @@ public class PlayerShield : MonoBehaviour
 
         shieldState = true;
         inCooldown = true;
-        GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+        GetComponent<Renderer>().material.color = new Color(255, 255, 255);
         StartCoroutine(parryEffectCooldown());
         StartCoroutine(parryActionCooldown());
     }
@@ -43,7 +44,7 @@ public class PlayerShield : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f);
 
-        GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+        GetComponent<Renderer>().material.color = ogColor;
         shieldState = false;
     }
 
@@ -63,11 +64,12 @@ public class PlayerShield : MonoBehaviour
             arrowScript = arrow.GetComponent<Arrow>();
             if (shieldState)
             {
-
+                // Arrow Hit Shield Muff Sound Effect
                 arrowScript.reflect();
             }
             else
             {
+               //Arrow Hit shield Sound Effect
                 Destroy(collidedObject);
             }
         }
@@ -78,11 +80,13 @@ public class PlayerShield : MonoBehaviour
             
             if (shieldState)
             {
+                // Parry Sound Effect
                 swordScript.status = SwordsmanMove.TrackType.knockback;
                 swordScript.startParriedKnockback();
             }
             else
             {
+                //Sword Clash Sound FX
                 swordScript.status = SwordsmanMove.TrackType.knockback;
                 swordScript.startKnockback();
                 playerScript.knockback();

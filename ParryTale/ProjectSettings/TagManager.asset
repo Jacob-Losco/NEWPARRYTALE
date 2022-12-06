@@ -11,6 +11,7 @@ TagManager:
   - Lava
   - Shield
   - Body
+  - Manager
   layers:
   - Default
   - TransparentFX
