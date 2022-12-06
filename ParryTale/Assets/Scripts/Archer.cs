@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Archer : MonoBehaviour
 {
-    public float coolDown = 3f;
+    public float coolDown;
 
     public GameObject arrow;
     public GameObject shootPoint;
@@ -37,10 +37,23 @@ public class Archer : MonoBehaviour
     }
     IEnumerator shoot()
     {
+        coolDown = Random.Range(2, 4);
         yield return new WaitForSeconds(coolDown);
         GameObject go = Instantiate(arrow);
 
         go.transform.position = shootPoint.transform.position;
         StartCoroutine(shoot());
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        
+        GameObject gameObj = collision.gameObject;
+
+        if(gameObj.tag == "Arrow")
+        {
+            Destroy(gameObj);
+            Destroy(this.gameObject);
+        }
     }
 }

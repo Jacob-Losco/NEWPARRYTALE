@@ -8,13 +8,16 @@ public class Arrow : MonoBehaviour
     private Rigidbody2D rb;
 
     public Vector2 direction;
+    public bool isReflect;
+    private float angle;
     // Start is called before the first frame update
     void Start()
     {
+        isReflect = false;
         rb = this.GetComponent<Rigidbody2D>();
         Vector3 direction = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
         Debug.Log("Direction = " + direction);
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //direction.Normalize();
         // facing = direction;
         rb.rotation = angle - 90;
@@ -22,22 +25,26 @@ public class Arrow : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        Move();
+    { 
+        this.transform.position = Move();
+       
+        if (isReflect)
+        {
+            rb.rotation = angle + 90;
+        }
     }
     
-    private void Move()
+    private Vector3 Move()
     {
-        Vector3 newPosition = speed * direction;
-        newPosition.z = 0;
-
-
-        this.transform.position += newPosition;
-    }
-    public void reflect(Vector2 inNormal)
-    {
-        Vector2 inDirection = GetComponent<Rigidbody2D>().velocity;
+        if (direction != Vector2.zero)
+        {
+            direction.Normalize();
+        }
         
+        Vector3 newPosition = new Vector3(speed * transform.up.x * Time.deltaTime, speed * transform.up.y * Time.deltaTime,0);
+        newPosition += this.transform.position;
+        return newPosition;
     }
+
     
 }
