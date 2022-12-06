@@ -7,10 +7,13 @@ public class PlayerMaster : MonoBehaviour
     public float speed = .75f;
     public GameObject playerBody;
     public GameObject playerShield;
+    public GameObject deathFx;
+    
 
     private Vector2 direction;
     private int health = 3;
     private bool inControl = true;
+    private bool isMoving = false;
     private float knockbackSpeed = 15f;
     private float localSpeed = 0;
     private float actualSpeed = 0;
@@ -23,6 +26,10 @@ public class PlayerMaster : MonoBehaviour
         playerBody.GetComponent<PlayerBody>().playerScript = this;
         playerShield = GameObject.Find("Shield");
         playerShield.GetComponent<PlayerShield>().playerScript = this;
+
+        deathFx =GetComponent<GameObject>();
+        
+        //dirt.Stop();
     }
 
     // Update is called once per frame
@@ -30,9 +37,12 @@ public class PlayerMaster : MonoBehaviour
     {
         if (inControl)
         {
+
             move();
             rotate();
+
         }
+        
     }
 
     private void move()
@@ -45,21 +55,26 @@ public class PlayerMaster : MonoBehaviour
         {
             direction.y = 1;
             localSpeed += speed;
+            //dirt.Play();
         }
         if (Input.GetKey(KeyCode.D))
         {
             direction.x = 1;
             localSpeed += speed;
+            //dirt.Play();
         }
         if (Input.GetKey(KeyCode.S))
         {
             direction.y = -1;
             localSpeed += speed;
+            //dirt.Play();
         }
         if (Input.GetKey(KeyCode.A))
         {
             direction.x = -1;
             localSpeed += speed;
+            //dirt.Play();
+
         }
 
         if (direction != Vector2.zero)
@@ -99,6 +114,7 @@ public class PlayerMaster : MonoBehaviour
         direction.Normalize();
         Vector3 newPosition = new Vector3(localSpeed * direction.x * Time.deltaTime, localSpeed * direction.y * Time.deltaTime, 0);
         this.transform.position += newPosition;
+        
     }
 
     private void rotate()
@@ -131,8 +147,10 @@ public class PlayerMaster : MonoBehaviour
     public void death()
     {
         //Player Death Sound Effect
+        Instantiate(deathFx);
         Destroy(playerBody);
         Destroy(playerShield);
+        Destroy(deathFx);
         Destroy(this);
     }
 }

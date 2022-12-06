@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerShield : MonoBehaviour
 {
+    ParticleSystem sparkFx;
     public PlayerMaster playerScript;
     private bool shieldState = false;
     private bool inCooldown = false;
@@ -18,6 +19,8 @@ public class PlayerShield : MonoBehaviour
     void Start()
     {
         ogColor = GetComponent<Renderer>().material.color;
+        sparkFx = this.GetComponent<ParticleSystem>();
+        sparkFx.Stop();
     }
 
     // Update is called once per frame
@@ -31,6 +34,7 @@ public class PlayerShield : MonoBehaviour
 
     IEnumerator parry()
     {
+
         yield return new WaitForSeconds(0f);
 
         shieldState = true;
@@ -62,10 +66,16 @@ public class PlayerShield : MonoBehaviour
         {
             arrow = collidedObject;
             arrowScript = arrow.GetComponent<Arrow>();
+            sparkFx.Play();
             if (shieldState)
             {
+
                 // Arrow Hit Shield Muff Sound Effect
-                arrowScript.reflect();
+                arrowScript.isReflect = true;
+
+
+                arrowScript.isReflect = true; 
+
             }
             else
             {
@@ -77,7 +87,7 @@ public class PlayerShield : MonoBehaviour
         {
             swordsman = collidedObject;
             swordScript = swordsman.GetComponent<SwordsmanMove>();
-            
+            sparkFx.Play();
             if (shieldState)
             {
                 // Parry Sound Effect
