@@ -5,7 +5,7 @@ using UnityEngine;
 public class Archer : MonoBehaviour
 {
     public float coolDown;
-
+    ParticleSystem bloodFx;
     public GameObject arrow;
     public GameObject shootPoint;
     public GameObject player;
@@ -21,6 +21,8 @@ public class Archer : MonoBehaviour
         archerContainer = GetComponentInParent<ArcherContainer>();
         rb = this.GetComponent<Rigidbody2D>();
         BowDraw = GetComponent<AudioSource>();
+        bloodFx = GetComponent<ParticleSystem>();
+        bloodFx.Stop();
         StartCoroutine(shoot());
     }
 
@@ -56,6 +58,13 @@ public class Archer : MonoBehaviour
         if(!BowDraw.isPlaying)
             BowDraw.PlayOneShot(BowDraw.clip, .75f);
     }
+    IEnumerator playBlood(GameObject go)
+    {
+        bloodFx.Play();
+        yield return new WaitForSeconds(0.2f);
+        Destroy(go);
+        Destroy(this.gameObject);
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -64,8 +73,8 @@ public class Archer : MonoBehaviour
         if(gameObj.tag == "Arrow")
         {
             archerContainer.playDeathSound();
-            Destroy(gameObj);
-            Destroy(this.gameObject);
+            StartCoroutine(playBlood(gameObj));
+
         }
     }
 }

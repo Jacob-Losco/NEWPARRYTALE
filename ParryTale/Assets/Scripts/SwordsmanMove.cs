@@ -6,6 +6,7 @@ public class SwordsmanMove : MonoBehaviour
 {
     public enum TrackType {patternUp, patternDown, vector, knockback, none };
     public TrackType status = TrackType.patternUp;
+    ParticleSystem bloodFx;
 
     public float speed = .2f;
     private GameObject player;
@@ -30,6 +31,8 @@ public class SwordsmanMove : MonoBehaviour
         status = TrackType.patternUp;
         countTarget = Random.Range(4, 8);
         speed = .2f;
+        bloodFx = GetComponent<ParticleSystem>();
+        bloodFx.Stop();
         StartCoroutine(startForward());
     }
 
@@ -156,12 +159,14 @@ public class SwordsmanMove : MonoBehaviour
             if(!swordHit.isPlaying)
                 swordHit.PlayOneShot(SwordsmanDeath, 1f);
 
-            Destroy(this.gameObject);
+           StartCoroutine(playBlood());
+            //Destroy(this.gameObject);
         }
         if(gameObject.tag == "Lava")
         {
             if (!swordHit.isPlaying)
                 swordHit.PlayOneShot(LavaBurn, 1f);
+            playBlood();
             Destroy(this.gameObject);
         }
         if(gameObject.tag == "Body")
@@ -173,6 +178,11 @@ public class SwordsmanMove : MonoBehaviour
         }
         
     }
-
+    IEnumerator playBlood()
+    {
+        bloodFx.Play();
+        yield return new WaitForSeconds(0.2f);
+        Destroy(this.gameObject);
+    }
 
 }
