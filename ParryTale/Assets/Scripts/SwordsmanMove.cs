@@ -15,9 +15,13 @@ public class SwordsmanMove : MonoBehaviour
     public int counter = 0;
     public int countTarget;
     private int rotateSpeed = 2;
+    private AudioSource swordHit;
+    public AudioClip LavaBurn;
+    public AudioClip SwordsmanDeath;
     // Start is called before the first frame update
     void Start()
     {
+        swordHit = GetComponent<AudioSource>();
         renderer = GetComponent<Renderer>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerMaster = player.GetComponent<PlayerMaster>();
@@ -149,14 +153,21 @@ public class SwordsmanMove : MonoBehaviour
         GameObject gameObject = collision.gameObject;
         if (gameObject.tag == "Arrow")
         {
+            if(!swordHit.isPlaying)
+                swordHit.PlayOneShot(SwordsmanDeath, 1f);
+
             Destroy(this.gameObject);
         }
         if(gameObject.tag == "Lava")
         {
+            if (!swordHit.isPlaying)
+                swordHit.PlayOneShot(LavaBurn, 1f);
             Destroy(this.gameObject);
         }
         if(gameObject.tag == "Body")
         {
+            if (!swordHit.isPlaying)
+                swordHit.PlayOneShot(swordHit.clip, 1f);
             status = TrackType.knockback;
             startKnockback();
         }

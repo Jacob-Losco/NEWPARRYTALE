@@ -5,11 +5,14 @@ using UnityEngine;
 public class PlayerBody : MonoBehaviour
 {
     public PlayerMaster playerScript;
+    private AudioSource PlayerDeath;
+    public AudioClip LavaBurn;
+    public AudioClip Drowning;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayerDeath = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,6 +27,7 @@ public class PlayerBody : MonoBehaviour
         if (collidedObject.tag == "Arrow")
         {
             playerScript.subtractHealth();
+            Destroy(collidedObject);
         }
         if (collidedObject.tag == "Swordsman")
         {
@@ -31,11 +35,15 @@ public class PlayerBody : MonoBehaviour
         }
         if (collidedObject.tag == "Lava")
         {
-            playerScript.death();
+            if (!PlayerDeath.isPlaying)
+                PlayerDeath.PlayOneShot(LavaBurn, 1f);
+            playerScript.deathWithNoSound();
         }
         if (collidedObject.tag == "Water")
         {
-            playerScript.death();
+            if (!PlayerDeath.isPlaying)
+                PlayerDeath.PlayOneShot(Drowning, 1f);
+            playerScript.deathWithNoSound();
         }
     }
 }

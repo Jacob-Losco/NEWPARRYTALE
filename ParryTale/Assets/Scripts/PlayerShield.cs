@@ -14,6 +14,10 @@ public class PlayerShield : MonoBehaviour
     private Arrow arrowScript;
     private SwordsmanMove swordScript;
     private Color ogColor;
+    private AudioSource ArrowHit;
+    public AudioClip ArrowHitMuff;
+    public AudioClip swordHitShield;
+    public AudioClip parrySound;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +25,7 @@ public class PlayerShield : MonoBehaviour
         ogColor = GetComponent<Renderer>().material.color;
         sparkFx = this.GetComponent<ParticleSystem>();
         sparkFx.Stop();
+        ArrowHit = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -70,16 +75,15 @@ public class PlayerShield : MonoBehaviour
             if (shieldState)
             {
 
-                // Arrow Hit Shield Muff Sound Effect
+                if (!ArrowHit.isPlaying)
+                    ArrowHit.PlayOneShot(ArrowHitMuff, .7f);
                 arrowScript.isReflect = true;
-
-
-                arrowScript.isReflect = true; 
 
             }
             else
             {
-               //Arrow Hit shield Sound Effect
+                if (!ArrowHit.isPlaying)
+                    ArrowHit.PlayOneShot(ArrowHit.clip, .8f);
                 Destroy(collidedObject);
             }
         }
@@ -90,13 +94,15 @@ public class PlayerShield : MonoBehaviour
             sparkFx.Play();
             if (shieldState)
             {
-                // Parry Sound Effect
+                if (!ArrowHit.isPlaying)
+                    ArrowHit.PlayOneShot(parrySound, .6f);
                 swordScript.status = SwordsmanMove.TrackType.knockback;
                 swordScript.startParriedKnockback();
             }
             else
             {
-                //Sword Clash Sound FX
+                if (!ArrowHit.isPlaying)
+                    ArrowHit.PlayOneShot(swordHitShield, .8f);
                 swordScript.status = SwordsmanMove.TrackType.knockback;
                 swordScript.startKnockback();
                 playerScript.knockback();

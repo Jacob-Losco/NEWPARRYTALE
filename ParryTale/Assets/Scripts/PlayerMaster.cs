@@ -18,6 +18,8 @@ public class PlayerMaster : MonoBehaviour
     private float localSpeed = 0;
     private float actualSpeed = 0;
     private Rigidbody2D rb;
+    private AudioSource damageSound;
+    public AudioClip deathSound;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,7 @@ public class PlayerMaster : MonoBehaviour
         playerShield.GetComponent<PlayerShield>().playerScript = this;
 
         deathFx =GetComponent<GameObject>();
+        damageSound = GetComponent<AudioSource>();
         
         //dirt.Stop();
     }
@@ -140,13 +143,24 @@ public class PlayerMaster : MonoBehaviour
         //Player Damage Sound Effect
         if(health == 0)
         {
-            death();
+            deathWithSound();
         }
+        if (!damageSound.isPlaying)
+            damageSound.PlayOneShot(damageSound.clip, .6f);
     }
 
-    public void death()
+    public void deathWithSound()
     {
-        //Player Death Sound Effect
+        if (!damageSound.isPlaying)
+            damageSound.PlayOneShot(deathSound, .7f);
+        Instantiate(deathFx);
+        Destroy(playerBody);
+        Destroy(playerShield);
+        Destroy(deathFx);
+        Destroy(this);
+    }
+    public void deathWithNoSound()
+    {
         Instantiate(deathFx);
         Destroy(playerBody);
         Destroy(playerShield);

@@ -13,10 +13,14 @@ public class Archer : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 facing;
+    private AudioSource BowDraw;
+    private ArcherContainer archerContainer;
     // Start is called before the first frame update
     void Start()
     {
+        archerContainer = GetComponentInParent<ArcherContainer>();
         rb = this.GetComponent<Rigidbody2D>();
+        BowDraw = GetComponent<AudioSource>();
         StartCoroutine(shoot());
     }
 
@@ -38,20 +42,28 @@ public class Archer : MonoBehaviour
     IEnumerator shoot()
     {
         coolDown = Random.Range(2, 4);
+        StartCoroutine(playBowDrawSound(coolDown - .6f));
         yield return new WaitForSeconds(coolDown);
         GameObject go = Instantiate(arrow);
 
         go.transform.position = shootPoint.transform.position;
         StartCoroutine(shoot());
     }
+
+    IEnumerator playBowDrawSound(float cooldown)
+    {
+        yield return new WaitForSeconds(cooldown);
+        if(!BowDraw.isPlaying)
+            BowDraw.PlayOneShot(BowDraw.clip, .75f);
+    }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        
         GameObject gameObj = collision.gameObject;
 
         if(gameObj.tag == "Arrow")
         {
+            archerContainer.playDeathSound();
             Destroy(gameObj);
             Destroy(this.gameObject);
         }
