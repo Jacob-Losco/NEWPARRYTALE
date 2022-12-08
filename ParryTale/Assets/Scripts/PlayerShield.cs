@@ -28,6 +28,7 @@ public class PlayerShield : MonoBehaviour
         sparkFx = this.GetComponent<ParticleSystem>();
         sparkFx.Stop();
         ArrowHit = GetComponent<AudioSource>();
+        playerScript = GetComponentInParent<PlayerMaster>();
     }
 
     // Update is called once per frame
@@ -41,7 +42,6 @@ public class PlayerShield : MonoBehaviour
 
     IEnumerator parry()
     {
-
         yield return new WaitForSeconds(0f);
 
         shieldState = true;
@@ -86,6 +86,7 @@ public class PlayerShield : MonoBehaviour
             {
                 if (!ArrowHit.isPlaying)
                     ArrowHit.PlayOneShot(ArrowHit.clip, .8f);
+                playerScript.startShortKnockback();
                 Destroy(collidedObject);
             }
         }
@@ -98,7 +99,6 @@ public class PlayerShield : MonoBehaviour
             {
                 if (!ArrowHit.isPlaying)
                     ArrowHit.PlayOneShot(parrySound, .6f);
-                swordScript.status = SwordsmanMove.TrackType.knockback;
                 swordScript.startParriedKnockback();
             }
             else
@@ -107,7 +107,7 @@ public class PlayerShield : MonoBehaviour
                     ArrowHit.PlayOneShot(swordHitShield, .8f);
                 swordScript.status = SwordsmanMove.TrackType.knockback;
                 swordScript.startKnockback();
-                playerScript.knockback();
+                playerScript.startLongKnockback();
             }
         }
     }

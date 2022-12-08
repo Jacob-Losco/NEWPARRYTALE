@@ -15,6 +15,7 @@ public class PlayerMaster : MonoBehaviour
     private bool inControl = true;
     private bool isMoving = false;
     private float knockbackSpeed = 15f;
+    private bool knockbackCooldown = false;
     private float localSpeed = 0;
     private float actualSpeed = 0;
     private Rigidbody2D rb;
@@ -40,10 +41,14 @@ public class PlayerMaster : MonoBehaviour
     {
         if (inControl)
         {
-
             move();
             rotate();
-
+        }
+        if (!inControl)
+        {
+            Vector2 temp = speed * knockback() * Time.deltaTime;
+            transform.position += new Vector3(temp.x, temp.y, 0);
+            rotate();
         }
         
     }
@@ -130,11 +135,23 @@ public class PlayerMaster : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 80));
     }
 
-    public void knockback()
+    public Vector2 knockback()
     {
-        Debug.Log("Function Ran");
-        Vector3 difference = transform.position - playerShield.transform.position;
-        transform.position = new Vector3(transform.position.x + difference.x, transform.position.y + difference.y, 0);
+        Vector2 difference = transform.position - playerShield.transform.position;
+        difference *= 2;
+        return difference;
+    }
+
+    public void startShortKnockback()
+    {
+        inControl = false;
+        StartCoroutine(startShortKnockbackCooldown());
+    }
+
+    public void startLongKnockback()
+    {
+        inControl = false;
+        StartCoroutine(startLongKnockbackCooldown());
     }
 
     public void subtractHealth()
@@ -166,5 +183,16 @@ public class PlayerMaster : MonoBehaviour
         Destroy(playerShield);
         Destroy(deathFx);
         Destroy(this);
+    }
+
+    IEnumerator startShortKnockbackCooldown()
+    {
+        yield return new WaitForSeconds(.2f);
+        inControl = true;
+    }
+    IEnumerator startLongKnockbackCooldown()
+    {
+        yield return new WaitForSeconds(.4f);
+        inControl = true;
     }
 }
