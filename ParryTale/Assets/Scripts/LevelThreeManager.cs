@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelOneManager : MonoBehaviour
+public class LevelThreeManager : MonoBehaviour
 {
     public Manager manager;
 
@@ -12,13 +12,14 @@ public class LevelOneManager : MonoBehaviour
         manager = this.GetComponent<Manager>();
 
         manager.instantiatePlayer(new Vector3(0, -2, 0));
-        manager.instantiateArcher(new Vector3(0, 2, 0));
+        manager.instantiateArcher(new Vector3(-5, 2, 0));
+        manager.instantiateSwordsman(new Vector3(5, 2, 0));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(manager.winState)
+        if (manager.winState)
         {
             StartCoroutine(moveNewScene());
         }
@@ -28,6 +29,6 @@ public class LevelOneManager : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f);
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelTwoSplash");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelFourSplash");
     }
 }

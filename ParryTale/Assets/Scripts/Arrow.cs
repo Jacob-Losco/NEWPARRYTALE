@@ -14,10 +14,9 @@ public class Arrow : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         Vector3 direction = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
-        Debug.Log("Direction = " + direction);
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rb.rotation = angle - 90;
-        Destroy(this, 10);
+        Destroy(this, 5);
     }
 
     // Update is called once per frame

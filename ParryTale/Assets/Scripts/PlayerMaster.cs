@@ -170,19 +170,25 @@ public class PlayerMaster : MonoBehaviour
     {
         if (!damageSound.isPlaying)
             damageSound.PlayOneShot(deathSound, .7f);
-        Instantiate(deathFx);
+        //Instantiate(deathFx);
         Destroy(playerBody);
         Destroy(playerShield);
-        Destroy(deathFx);
-        Destroy(this);
+        //Destroy(deathFx);
+        StartCoroutine(gameOverScene());
     }
     public void deathWithNoSound()
     {
-        Instantiate(deathFx);
+        //Instantiate(deathFx);
         Destroy(playerBody);
         Destroy(playerShield);
-        Destroy(deathFx);
-        Destroy(this);
+        //Destroy(deathFx);
+        StartCoroutine(gameOverScene());
+    }
+    IEnumerator gameOverScene()
+    {
+        yield return new WaitForSeconds(1f);
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
     }
 
     IEnumerator startShortKnockbackCooldown()
