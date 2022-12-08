@@ -10,6 +10,7 @@ public class Archer : MonoBehaviour
     public GameObject shootPoint;
     public GameObject player;
     public float speed = 5f;
+    public Manager manager;
 
     private Rigidbody2D rb;
     private Vector2 facing;
@@ -30,15 +31,11 @@ public class Archer : MonoBehaviour
     void Update()
     {
         rotate();
-        //Debug.Log("Rotated Archer");
     }
     private void rotate()
     {
         Vector3 direction = GameObject.FindGameObjectWithTag("Player").transform.position - this.transform.position;
-        //Debug.Log("Direction = " + direction);
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        //direction.Normalize();
-        // facing = direction;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 15;
         rb.rotation = angle - 196;
     }
     IEnumerator shoot()
@@ -72,9 +69,8 @@ public class Archer : MonoBehaviour
 
         if(gameObj.tag == "Arrow")
         {
-            archerContainer.playDeathSound();
             StartCoroutine(playBlood(gameObj));
-
+            manager.decrementEnemies();
         }
     }
 }

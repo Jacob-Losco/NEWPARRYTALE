@@ -127,7 +127,7 @@ public class PlayerMaster : MonoBehaviour
         mouseScreenPos.x -= startingScreenPos.x;
         mouseScreenPos.y -= startingScreenPos.y;
         var angle = Mathf.Atan2(mouseScreenPos.y, mouseScreenPos.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
+        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 80));
     }
 
     public void knockback()

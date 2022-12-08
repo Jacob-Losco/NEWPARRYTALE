@@ -14,6 +14,7 @@ public class PlayerShield : MonoBehaviour
     private Arrow arrowScript;
     private SwordsmanMove swordScript;
     private Color ogColor;
+    private Rigidbody2D rb;
     private AudioSource ArrowHit;
     public AudioClip ArrowHitMuff;
     public AudioClip swordHitShield;
@@ -22,6 +23,7 @@ public class PlayerShield : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = this.GetComponent<Rigidbody2D>();
         ogColor = GetComponent<Renderer>().material.color;
         sparkFx = this.GetComponent<ParticleSystem>();
         sparkFx.Stop();
@@ -51,7 +53,7 @@ public class PlayerShield : MonoBehaviour
 
     IEnumerator parryEffectCooldown()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.25f);
 
         GetComponent<Renderer>().material.color = ogColor;
         shieldState = false;
@@ -60,7 +62,7 @@ public class PlayerShield : MonoBehaviour
     IEnumerator parryActionCooldown()
     {
         yield return new WaitForSeconds(1f);
-
+        
         inCooldown = false;
     }
 
@@ -77,7 +79,7 @@ public class PlayerShield : MonoBehaviour
 
                 if (!ArrowHit.isPlaying)
                     ArrowHit.PlayOneShot(ArrowHitMuff, .7f);
-                arrowScript.isReflect = true;
+                arrowScript.Reflect(rb.rotation);
 
             }
             else

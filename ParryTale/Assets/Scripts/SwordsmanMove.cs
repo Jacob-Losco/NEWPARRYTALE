@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SwordsmanMove : MonoBehaviour
@@ -7,7 +6,7 @@ public class SwordsmanMove : MonoBehaviour
     public enum TrackType {patternUp, patternDown, vector, knockback, none };
     public TrackType status = TrackType.patternUp;
     ParticleSystem bloodFx;
-
+    public Manager manager;
     public float speed = .2f;
     private GameObject player;
     private PlayerMaster playerMaster;
@@ -160,14 +159,14 @@ public class SwordsmanMove : MonoBehaviour
                 swordHit.PlayOneShot(SwordsmanDeath, 1f);
 
            StartCoroutine(playBlood());
-            //Destroy(this.gameObject);
+            manager.decrementEnemies();
         }
         if(gameObject.tag == "Lava")
         {
             if (!swordHit.isPlaying)
                 swordHit.PlayOneShot(LavaBurn, 1f);
             playBlood();
-            Destroy(this.gameObject);
+            manager.decrementEnemies();
         }
         if(gameObject.tag == "Body")
         {
