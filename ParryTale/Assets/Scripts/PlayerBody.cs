@@ -9,6 +9,8 @@ public class PlayerBody : MonoBehaviour
     public AudioClip LavaBurn;
     public AudioClip Drowning;
 
+    private float playerColor = 255;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,15 +25,18 @@ public class PlayerBody : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        playerColor -= 127;
         GameObject collidedObject = collision.gameObject;
         if (collidedObject.tag == "Arrow")
         {
             playerScript.subtractHealth();
             Destroy(collidedObject);
+            GetComponent<Renderer>().material.color = new Color(255, playerColor, playerColor);
         }
         if (collidedObject.tag == "Swordsman")
         {
             playerScript.subtractHealth();
+            GetComponent<Renderer>().material.color = new Color(255, playerColor, playerColor);
         }
         if (collidedObject.tag == "Lava")
         {
