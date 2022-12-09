@@ -165,7 +165,7 @@ public class SwordsmanMove : MonoBehaviour
         {
             if (!swordHit.isPlaying)
                 swordHit.PlayOneShot(LavaBurn, 1f);
-            playBlood();
+            death();
             manager.decrementEnemies();
         }
         if(gameObject.tag == "Body")
