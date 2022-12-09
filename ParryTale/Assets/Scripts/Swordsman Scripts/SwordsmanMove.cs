@@ -177,11 +177,16 @@ public class SwordsmanMove : MonoBehaviour
         }
         
     }
+
+    private void death()
+    {
+        Destroy(this.gameObject);
+    }
     IEnumerator playBlood()
     {
         bloodFx.Play();
         yield return new WaitForSeconds(0.2f);
-        Destroy(this.gameObject);
+        death();
     }
 
 }

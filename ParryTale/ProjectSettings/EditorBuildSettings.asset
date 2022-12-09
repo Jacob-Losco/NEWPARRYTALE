@@ -23,4 +23,31 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Test.unity
     guid: defbd3cb735b39b4bb8c9d8169b928e1
+  - enabled: 1
+    path: Assets/GameOver.unity
+    guid: 77ea5a7d56e477642b5259cd6592e566
+  - enabled: 1
+    path: Assets/LevelFive.unity
+    guid: 3b5a4e249792cb64c8718a56fcee9b7e
+  - enabled: 1
+    path: Assets/LevelFiveSplash.unity
+    guid: a2afdd13dfcc662498f6ef42e7affed4
+  - enabled: 1
+    path: Assets/LevelFour.unity
+    guid: 2b46cc4d3c286384d907176008e03663
+  - enabled: 1
+    path: Assets/LevelFourSplash.unity
+    guid: 177a12ed1d3bb75449f75e431e462954
+  - enabled: 1
+    path: Assets/LevelThreeSplash.unity
+    guid: c1ac59ac261049e46a1fc17bea4dd491
+  - enabled: 1
+    path: Assets/LevelTwo.unity
+    guid: 7f063e9f8c6228b49996ec55ed6c1354
+  - enabled: 1
+    path: Assets/LevelTwoSplash.unity
+    guid: c472cae5dfa77a147949527016cf379c
+  - enabled: 1
+    path: Assets/LevelThree.unity
+    guid: 4bcb7e51de5f22341b7f75ecf2c7ce33
   m_configObjects: {}

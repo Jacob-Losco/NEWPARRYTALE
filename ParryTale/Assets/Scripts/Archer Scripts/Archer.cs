@@ -16,6 +16,7 @@ public class Archer : MonoBehaviour
     private Vector2 facing;
     private AudioSource BowDraw;
     private ArcherContainer archerContainer;
+    public AudioClip deathSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +70,8 @@ public class Archer : MonoBehaviour
 
         if(gameObj.tag == "Arrow")
         {
+            if (!BowDraw.isPlaying)
+                BowDraw.PlayOneShot(deathSound, .75f);
             StartCoroutine(playBlood(gameObj));
             manager.decrementEnemies();
         }

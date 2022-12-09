@@ -21,6 +21,8 @@ public class PlayerMaster : MonoBehaviour
     private Rigidbody2D rb;
     private AudioSource damageSound;
     public AudioClip deathSound;
+    public AudioClip LavaBurn;
+    public AudioClip drowningSound;
 
     // Start is called before the first frame update
     void Start()
@@ -176,11 +178,24 @@ public class PlayerMaster : MonoBehaviour
         //Destroy(deathFx);
         StartCoroutine(gameOverScene());
     }
-    public void deathWithNoSound()
+    public void deathLava()
     {
         //Instantiate(deathFx);
         Destroy(playerBody);
         Destroy(playerShield);
+        if (!damageSound.isPlaying)
+            damageSound.PlayOneShot(LavaBurn, .7f);
+        //Destroy(deathFx);
+        StartCoroutine(gameOverScene());
+    }
+
+    public void deathWater()
+    {
+        //Instantiate(deathFx);
+        Destroy(playerBody);
+        Destroy(playerShield);
+        if (!damageSound.isPlaying)
+            damageSound.PlayOneShot(drowningSound, .7f);
         //Destroy(deathFx);
         StartCoroutine(gameOverScene());
     }

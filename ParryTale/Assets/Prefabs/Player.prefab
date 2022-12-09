@@ -9925,6 +9925,8 @@ MonoBehaviour:
   playerShield: {fileID: 7921386252188577378}
   deathFx: {fileID: 648070955451842523}
   deathSound: {fileID: 8300000, guid: d2f2672ff4f196e479a34dc80412ba40, type: 3}
+  LavaBurn: {fileID: 8300000, guid: e5533328635927a42841f109684812af, type: 3}
+  drowningSound: {fileID: 8300000, guid: 6381f90d3ac14f44a92eb4b0404e238a, type: 3}
 --- !u!82 &-8264868961982877273
 AudioSource:
   m_ObjectHideFlags: 0

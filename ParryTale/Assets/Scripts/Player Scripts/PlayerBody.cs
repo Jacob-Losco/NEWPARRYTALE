@@ -40,15 +40,11 @@ public class PlayerBody : MonoBehaviour
         }
         if (collidedObject.tag == "Lava")
         {
-            if (!PlayerDeath.isPlaying)
-                PlayerDeath.PlayOneShot(LavaBurn, 1f);
-            playerScript.deathWithNoSound();
+            playerScript.deathLava();
         }
         if (collidedObject.tag == "Water")
         {
-            if (!PlayerDeath.isPlaying)
-                PlayerDeath.PlayOneShot(Drowning, 1f);
-            playerScript.deathWithNoSound();
+            playerScript.deathWater();
         }
     }
 }

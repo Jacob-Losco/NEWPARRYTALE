@@ -440,6 +440,10 @@ PrefabInstance:
       propertyPath: arrow
       value: 
       objectReference: {fileID: 6964520225398697088, guid: 28c17ee6ab021bf4c8984a6213e231ab, type: 3}
+    - target: {fileID: 668288701240454775, guid: 9a16321f1f42d9e42a894f14220b8114, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 688862cf2b3def24887a17d2e8ab9168, type: 3}
     - target: {fileID: 5614169278168584476, guid: 9a16321f1f42d9e42a894f14220b8114, type: 3}
       propertyPath: m_Name
       value: Archer
